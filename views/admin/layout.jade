@@ -1,0 +1,51 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Control Panel - Login
+    // core CSS
+    link(href="/css/bootstrap.min.css", rel='stylesheet')
+    link(href="/css/font-awesome.min.css", rel='stylesheet')
+    link(href="/css/simple-sidebar.css", rel='stylesheet')
+    script(type='text/javascript', src="/js/jquery.js")
+    script(type='text/javascript', src="/js/bootstrap.min.js")
+    style(type='text/css').
+      .navbar-collapse{ padding: 0px !important; border: none;}
+  body
+    #wrapper
+      // Sidebar
+      #sidebar-wrapper
+        ul.sidebar-nav
+          li.sidebar-brand
+            a(href='#')
+              | Antech-Enviro
+          li
+            a Welcome #{session.user.firstname}!
+          li
+            a(href="general_settings") General Settings
+          li
+            a(href="keyword_manager") Keyword Manager
+          li
+            a(href="principals") Antech Principals
+          li
+            a(href="image_slider") Image Slider
+          li
+            a(href="product_category") Product Category
+          li
+            a(href="product") Products 
+          li
+            a(href="/admin/logout") Logout 
+      // /#sidebar-wrapper
+      // Page Content
+      #page-content-wrapper
+        .container-fluid
+          .row
+            .col-lg-12
+              //BEGIN content            
+              block content
+              //END content 
+      // /#page-content-wrapper
+      

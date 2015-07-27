@@ -1,0 +1,28 @@
+section#bottom
+      .container.wow.fadeInDown(data-wow-duration='1000ms', data-wow-delay='600ms')
+        .row
+          .col-md-6.col-sm-6
+            .widget
+              h3 Company
+              ul
+                li
+                  a(href='/about') About us
+                li
+                  a(href='/contact') Contact us
+          // /.col-md-3
+          .col-md-6.col-sm-6
+            .widget
+              h3 Our Principals
+              ul
+                each principal in session.principals
+                  li
+                    a(href='http://#{principal.url}', target='_blank')= principal.name
+          // /.col-md-3
+          //.col-md-4.col-sm-4
+            //.widget
+              //h3 More Info
+              //ul
+                //li
+                  //a(href='#') More Info
+          // /.col-md-3
+    // /#bottom

@@ -1,0 +1,34 @@
+html
+  head
+    link(href='/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/css/main.css', rel='stylesheet')
+  body
+    section#login
+      .container
+        .row
+          .col-xs-6.col-xs-offset-3
+            .form-wrap
+              h1(style="color:black") Login
+              form#login-form(role='form', action='/admin/login', method='post', autocomplete='off')
+                .form-group
+                  label.sr-only(for='email') Email
+                  input#username.form-control(type='text', name='username', placeholder='antech_user')
+                .form-group
+                  label.sr-only(for='key') Password
+                  input#password.form-control(type='password', name='password', placeholder='password')
+                .checkbox
+                  span.character-checkbox(onclick='showPassword()')
+                  span.label Show password
+                input#btn-login.btn.btn-primary.btn-lg.btn-block(type='submit', value='Log in')
+              .alert.alert-danger(role='alert')
+                span.glyphicon.glyphicon-exclamation-sign(aria-hidden='true')
+                span.sr-only Error:
+                |  #{msg}
+
+          // /.col-xs-12
+        // /.row
+      // /.container
+   script(src='/js/jquery.js')
+   script(src='/js/bootstrap.min.js')
+   script(src='/js/main.js')
+   script(src='/js/login.js')

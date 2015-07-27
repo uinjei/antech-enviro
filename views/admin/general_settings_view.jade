@@ -1,0 +1,27 @@
+extends layout
+
+block content
+
+ h1 General Settings
+    form(method='POST', action="/admin/general_settings/save", enctype='multipart/form-data')
+      .form-group
+        label(for='site_title') Site Title
+        input#site_title.form-control(type='text', value="#{settings.title}", name='site_title', placeholder='Enter Site Title', required='required')
+      .form-group
+        label(for='site_tagline') Site Tagline
+        input#site_tagline.form-control(type='text', value="#{settings.tagline}", name='site_tagline', placeholder='Enter Tag line', required='required')
+      .form-group
+        label(for='site_url') Site URL
+        input#site_url.form-control(type='text', value="#{settings.url}", name='site_url', placeholder='Enter Site URL', required='required')
+      .form-group
+        label(for='file') Site LOGO
+        input#site_logo(type='file', name='userfile', size='20', style='display:inline', required='required')
+        img(src="", width='50', style='display:inline')
+        p.help-block Select the logo (Allowed files: PNG with 200p X 52p dimension).
+      .form-group
+        label(for='site_email') Site Email
+        input#site_email.form-control(type='email', value="#{settings.email}", placeholder='Enter Email Site', name='site_email')
+      .form-group
+        label(for='site_contact') Site Contact#
+        input#site_contact.form-control(value="#{settings.contact}", placeholder='Enter Site Contact', name='site_contact')
+      button.btn.btn-default(type='submit') Save

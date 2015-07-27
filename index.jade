@@ -1,0 +1,147 @@
+extends layout
+
+block content
+    <!-------------------------carousel-------------------------!->
+    // /header
+    section.no-margin
+      #carousel-example-generic.carousel.slide(data-ride='carousel')
+        // Indicators
+        ol.carousel-indicators
+          each slider in sliders
+           li(data-target='#carousel-example-generic', data-slide-to='#{sliders.indexOf(slider)}',class="#{sliders.indexOf(slider) == 0 ?'active':''}")
+          
+        // Wrapper for slides
+        .carousel-inner(role='listbox')
+           each slider in sliders
+              .item(class="#{sliders.indexOf(slider) == 0 ?'active':''}")
+                  img(src='/data/#{slider.image}')
+                  .carousel-caption
+                    h1=slider.title
+                    p=slider.description
+
+
+          a.left.carousel-control(href='#carousel-example-generic', role='button', data-slide='prev')
+            span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+            span.sr-only Previous
+          a.right.carousel-control(href='#carousel-example-generic', role='button', data-slide='next')
+            span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+            span.sr-only Next
+    
+     <!-------------------------end-------------------------!->
+      
+    section#services.service-item
+      .container
+        .center.wow.fadeInDown
+          h2 Products and Services
+          p.lead
+            | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
+            br
+            |  et dolore magna aliqua. Ut enim ad minim veniam
+        .row
+          each principal in principals
+            .col-sm-6.col-md-4
+              .thumbnail
+                img(src='/data/alliedhightech_powercut10_abrasive_saw.jpg', alt='')
+                .caption
+                  h4
+                    a.truncate-me-1(href='/viewproduct?prodId=#{principal.id}')= principal.name
+        // /.row
+      // /.container
+    // /#services
+    section#conatcat-info
+      .container
+        .row
+          .col-sm-8
+            .media.contact-info.wow.fadeInDown(data-wow-duration='1000ms', data-wow-delay='600ms')
+              .pull-left
+                i.fa.fa-phone
+              .media-body
+                h2 Have a question or need a custom quote?
+                p
+                  | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation +0123 456 70 80
+      // /.container
+    // /#conatcat-info
+    section#bottom
+      .container.wow.fadeInDown(data-wow-duration='1000ms', data-wow-delay='600ms')
+        .row
+          .col-md-3.col-sm-6
+            .widget
+              h3 Company
+              ul
+                li
+                  a(href='#') About us
+                li
+                  a(href='#') We are hiring
+                li
+                  a(href='#') Meet the team
+                li
+                  a(href='#') Copyright
+                li
+                  a(href='#') Terms of use
+                li
+                  a(href='#') Privacy policy
+                li
+                  a(href='#') Contact us
+          // /.col-md-3
+          .col-md-3.col-sm-6
+            .widget
+              h3 Support
+              ul
+                li
+                  a(href='#') Faq
+                li
+                  a(href='#') Blog
+                li
+                  a(href='#') Forum
+                li
+                  a(href='#') Documentation
+                li
+                  a(href='#') Refund policy
+                li
+                  a(href='#') Ticket system
+                li
+                  a(href='#') Billing system
+          // /.col-md-3
+          .col-md-3.col-sm-6
+            .widget
+              h3 Developers
+              ul
+                li
+                  a(href='#') Web Development
+                li
+                  a(href='#') SEO Marketing
+                li
+                  a(href='#') Theme
+                li
+                  a(href='#') Development
+                li
+                  a(href='#') Email Marketing
+                li
+                  a(href='#') Plugin Development
+                li
+                  a(href='#') Article Writing
+          // /.col-md-3
+          .col-md-3.col-sm-6
+            .widget
+              h3 Our Partners
+              ul
+                li
+                  a(href='#') Adipisicing Elit
+                li
+                  a(href='#') Eiusmod
+                li
+                  a(href='#') Tempor
+                li
+                  a(href='#') Veniam
+                li
+                  a(href='#') Exercitation
+                li
+                  a(href='#') Ullamco
+                li
+                  a(href='#') Laboris
+          // /.col-md-3
+    // /#bottom
+script(type='text/javascript').
+  $(document).ready(function(){
+  $('.carousel').carousel();
+  })

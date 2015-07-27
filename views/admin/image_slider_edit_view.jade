@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  
+  h1 Image Slider
+      form(method='POST', action="/admin/image_slider/update", enctype='multipart/form-data')
+        .form-group
+          label(for='site_title') Slider Title
+          input#site_title.form-control(type='hidden', value='#{slider.id}', name='id' , required='required')
+          input#site_title.form-control(type='text', value='#{slider.title}', name='title', required='required')
+        .form-group
+          label(for='site_title') Slider Description
+          input#site_title.form-control(type='text', value='#{slider.description}', name='description', placeholder='Enter Client URL', required='required')
+        .form-group
+          label(for='site_title') Slider Link
+          input#site_title.form-control(type='text', value='#{slider.link}', name='link', placeholder='Link', required='required')
+        .form-group
+          label(for='file') Slider Image
+          input(type='file', name='userfile', size='20', style='display:inline')
+          img(src='/data/#{slider.image}', width='100')
+          p.help-block Select the image.
+          button.btn.btn-default(type='submit') Save
+     

@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  
+  h1 Our Principals
+      form(method='POST', action="/admin/principals/save", enctype='multipart/form-data')
+        .form-group
+          label(for='site_title') Client Name
+          input#site_title.form-control(type='text', value='', name='name', placeholder='Enter Client Name', required='required')
+        .form-group
+          label(for='site_title') Client URL
+          input#site_title.form-control(type='text', value='', name='url', placeholder='Enter Client URL', required='required')
+        .form-group
+          label(for='file') Client Logo
+          input(type='file', name='userfile', size='20', style='display:inline', required='required')
+          p.help-block Select the logo.
+          button.btn.btn-default(type='submit') Save
+      hr
+      h3 Principal Listing
+      table.table.table-striped
+        th #
+        th(width='50%') Client Name
+        th Client URL
+        th(style='text-align:center;') Client LOGO
+        th(style='text-align:center;') Action
+        
+        each principal in principals
+          tr
+            td
+            td= principal.name
+            td= principal.url
+            td(align='center')
+              img(src='/data/#{principal.logo}', width='30')
+            td(align='center', style='vertical-align:middle;')
+              a(href='principals/edit?id=#{principal.id}') EDIT
+      script.
+        $('#myStateButton').on('click', function () {
+        $(this).button('complete') // button text will be "finished!"
+        });
+
+
+
+
+

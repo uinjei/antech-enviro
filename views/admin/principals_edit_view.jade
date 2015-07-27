@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  
+  h1 Our Principals
+      form(method='POST', action="/admin/principals/update", enctype='multipart/form-data')
+        .form-group
+          label(for='site_title') Client Name
+          input#site_title.form-control(type='hidden', value='#{principal.id}', name='id', placeholder='Enter Client Name', required='required')
+          input#site_title.form-control(type='text', value='#{principal.name}', name='name', placeholder='Enter Client Name', required='required')
+        .form-group
+          label(for='site_title') Client URL
+          input#site_title.form-control(type='text', value='#{principal.url}', name='url', placeholder='Enter Client URL', required='required')
+        .form-group
+          label(for='file') Client Logo
+          input(type='file', name='userfile', size='20', style='display:inline')
+          img(src='/data/#{principal.logo}', width='100')
+          p.help-block Select the logo.
+          button.btn.btn-default(type='submit') Save
+     

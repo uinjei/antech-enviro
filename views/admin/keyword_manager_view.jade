@@ -1,0 +1,11 @@
+extends layout
+
+block content
+
+  h1 Keyword Manager
+    hr
+    form(method='POST', action="keyword_manager/save")
+      .form-group
+        label(for='site_title') SEO Keyword
+        textarea#site_title.form-control(required='required', style='height:300px', name='keyword')
+      button.btn.btn-default(type='submit') Save

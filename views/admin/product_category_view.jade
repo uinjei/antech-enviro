@@ -1,0 +1,45 @@
+extends layout
+
+block content
+
+  h1 Product Category
+      form(method='POST', action="/admin/product_category/save", enctype='multipart/form-data')
+        .form-group
+          label(for='site_title') Principal
+          select.form-control(required='required', name='principal_id')
+           each principal in principals
+            option(value='#{principal.id}') #{principal.name}
+        .form-group
+          label(for='site_title') Category Name
+          input#site_title.form-control(type='text', name='name', required='required')
+        .form-group
+          label(for='site_title') Category Description
+          input#site_title.form-control(type='text', name='description', required='required')
+        .form-group
+          label(for='file') Category Image
+          input(type='file', name='userfile', size='20', style='display:inline', required='required')
+          p.help-block Select image.
+          button.btn.btn-default(type='submit') Save
+      hr
+      h3 Category Listing
+      table.table.table-striped
+        th(width='30%') Principal Name
+        th(width='30%') Category Name
+        th(width='40%') Category Description
+        th(width='10%') Image
+        th(width='30%', style='text-align:center') Action
+
+        each category in p_category
+         tr
+            td= category.Principal.name
+            td= category.name
+            td= category.description
+            td(align='center')
+              img(src='/data/#{category.image}', width='30')
+            td(align='center', style='vertical-align:middle;')
+              a(href='product/edit?id=#{category.id}') EDIT
+        
+      script.
+        $('#myStateButton').on('click', function () {
+        $(this).button('complete') // button text will be "finished!"
+        })

@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  
+ h1 Image Slider
+    form(method='POST', action="/admin/image_slider/save", enctype='multipart/form-data')
+      .form-group
+        label(for='site_title') Slider Title
+        input#site_title.form-control(type='text', name='title', required='required')
+      .form-group
+        label(for='site_title') Slider Description
+        input#site_title.form-control(type='text', name='description', required='required')
+      .form-group
+        label(for='site_title') Link
+        input#site_title.form-control(type='text', name='link', required='required')
+      .form-group
+        label(for='file') Slider Image
+        input(type='file', name='userfile', size='20', style='display:inline', required='required')
+        p.help-block Select image.
+        button.btn.btn-default(type='submit') Upload
+    hr
+    h3 Slider Listing
+    table.table.table-striped
+      th(width='30%') Slider Name
+      th(width='20%') Description
+      th(width='20%') Link
+      th(width='10%') Image
+      th(width='30%', style='text-align:center') Action
+      each slider in sliders
+         tr(id='#{slider.id}')
+            td= slider.title
+            td= slider.description
+            td= slider.link
+            td(align='center')
+              img(src='/data/#{slider.image}')
+            td(align='center', style='vertical-align:middle;')
+              a(href='image_slider/edit?id=#{slider.id}') EDIT
+              a(href='#',class='del',data-id='#{slider.id}')   DELETE
+    script.
+      $('#myStateButton').on('click', function () {
+      $(this).button('complete') // button text will be "finished!"
+      })

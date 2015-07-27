@@ -1,0 +1,49 @@
+header#header
+  //top bar - to follow
+  //.top-bar
+  //  .container
+  //    .row
+  //      .col-sm-6.col-xs-4
+  //        .top-number
+  //          p
+  //            i.fa.fa-phone-square
+  //            |   #{session.settings.contact}
+  //      .col-sm-6.col-xs-8
+  //        .social
+  //          .search
+  //            form(role='form')
+  //              input.search-form(type='text', autocomplete='off', placeholder='Search')
+  //              i.fa.fa-search
+    // /.container
+  // /.top-bar
+  nav.navbar.navbar-inverse(role='banner')
+    .container
+      .navbar-header
+        button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href='/')
+          img(src='/data/#{session.settings.logo}', alt='logo')
+      .collapse.navbar-collapse.navbar-right
+        ul.nav.navbar-nav
+          li(class="#{active=='0'?'active':''}")
+            a(href='/') Home
+          li(class="#{active==1?'active':''}")
+            a(href='/about') About Us
+            
+          li(class="#{active==2?'dropdown, active':'dropdown'}")
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              | Products 
+              i.fa.fa-angle-down
+            ul.dropdown-menu
+              each principal in session.principals
+                li(class="#{session.principals.indexOf(principal)==selPrincipalId-1?'active':''}")
+                  a(href='/products/update?selPrincipalId=#{principal.id}&catId=#{principal.Categories[0]!=undefined?principal.Categories[0].id:""}')= principal.name
+             
+          li(class="#{active==3?'active':''}")
+            a(href='/contact') Contact
+    // /.container
+  // /nav
+// /header

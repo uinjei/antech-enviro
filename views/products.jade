@@ -1,0 +1,53 @@
+extends layout
+
+block content
+
+    section#content.shortcode-item
+      //  Page Content
+      .container
+      
+        div(class='alert alert-danger #{categories.length==0?"":"hidden"}', role='alert')
+          span.glyphicon.glyphicon-exclamation-sign(aria-hidden='true')
+          span.sr-only Error:
+          |  No category/product found
+        .row
+          .col-md-3
+            .list-group
+              each category in categories
+                a.list-group-item(href='/products/update?selPrincipalId=#{selPrincipalId}&catId=#{category.id}&selPage=0')= category.name
+            .list-group
+              a.list-group-item(data-toggle='lightbox', href='/pricequotation') View your quote list
+          .col-md-9
+            div(class='alert alert-danger #{categories.length>=1&&products.length==0?"":"hidden"}', role='alert')
+              span.glyphicon.glyphicon-exclamation-sign(aria-hidden='true')
+              span.sr-only Error:
+              |  No product found
+            .row
+              each product in products
+                .col-sm-4.col-lg-4.col-md-4
+                  .thumbnail.thumbnail-295px
+                    a.truncate-me-1(href='/viewproduct?selPrincipalId=#{selPrincipalId}&prodId=#{product.id}&catId=#{selCatId}')
+                      img.img-144px(src='/data/#{product.image}', alt='')
+                    .caption
+                      h4
+                        a.truncate-me-1(href='/viewproduct?selPrincipalId=#{selPrincipalId}&prodId=#{product.id}&catId=#{selCatId}')= product.name
+                      div.truncate-me-2
+                        p= product.description
+                        
+            .row
+              nav
+                ul.pagination
+                  li(class="#{selPage==0?'disabled':''}")
+                    a(href='/products/update?selPrincipalId=#{selPrincipalId}&catId=#{selCatId}&selPage=0', aria-label='Previous')
+                      span(aria-hidden='true') «
+                  - var n = 0
+                  while n < pages
+                    li(class="#{n==selPage?'active':''}")
+                      a(href='/products/update?selPrincipalId=#{selPrincipalId}&catId=#{selCatId}&selPage=#{n++}')= n
+                  li(class="#{selPage==pages-1?'disabled':''}")
+                    a(href='/products/update?selPrincipalId=#{selPrincipalId}&catId=#{selCatId}&selPage=#{pages-1}', aria-label='Next')
+                      span(aria-hidden='true') »
+
+        
+    include ./includes/bottom.jade                    
+    

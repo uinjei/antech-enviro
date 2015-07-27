@@ -1,0 +1,66 @@
+extends layout
+
+block content
+
+    // /header
+    section#main-slider.no-margin
+      .carousel.slide
+        ol.carousel-indicators
+          each slider in sliders
+            - var x = sliders.indexOf(slider)
+            li(class="#{x==0?'active':''}", data-target='#main-slider', data-slide-to='#{x}')
+        .carousel-inner
+          each slider in sliders
+            .item(class="#{sliders.indexOf(slider)==0?'active':''}")
+              .container
+                .row.slide-margin
+                  .col-sm-6
+                    .carousel-content
+                      h1.animation.animated-item-1= slider.title
+                      h2.animation.animated-item-2= slider.description
+                      a.btn-slide.animation.animated-item-3(href='#{slider.link}') Read More
+                  .col-sm-6.hidden-xs.animation.animated-item-4
+                    .slider-img
+                      img.img-responsive(src='/data/#{slider.image}')
+            // /.item
+        // /.carousel-inner
+      // /.carousel
+      a.prev.hidden-xs(href='#main-slider', data-slide='prev')
+        i.fa.fa-chevron-left
+      a.next.hidden-xs(href='#main-slider', data-slide='next')
+        i.fa.fa-chevron-right
+    // /#main-slider
+    section#services.service-item
+      .container
+        .center.wow.fadeInDown
+          h2 Products and Services
+          p.lead
+            | You can select variety of products from our principals below 
+        .row
+          each principal in session.principals
+            .col-sm-6.col-md-4
+              .thumbnail
+                a.truncate-me-1(href='/products/update?selPrincipalId=#{principal.id}&catId=#{principal.Categories[0]!=undefined?principal.Categories[0].id:""}')
+                  img(src='/data/#{principal.logo}', alt='')
+                //.caption
+                //  h4
+                //    a.truncate-me-1(href='/viewproduct?prodId=#{principal.id}')= principal.name
+        // /.row
+      // /.container
+    // /#services
+    section#conatcat-info
+      .container
+        .row
+          .col-sm-8
+            .media.contact-info.wow.fadeInDown(data-wow-duration='1000ms', data-wow-delay='600ms')
+              .pull-left
+                i.fa.fa-phone
+              .media-body
+                h2 Have a question or need a price quote?
+                p
+                  | Feel free to navigate
+                  a(href='/contact') &nbsp; contacts
+                  | &nbsp; page.
+      // /.container
+    // /#conatcat-info
+    include ./includes/bottom.jade

@@ -1,0 +1,17 @@
+{
+	"development": {
+		"email":"antech.enviro@gmail.com",
+		"pass":"@ntech-envir0",
+		"adminEmail": "info@antech-enviro.com, javier.edwinjay@gmail.com"
+	},
+	"test": {
+		"email":"antech.enviro@gmail.com",
+		"pass":"@ntech-envir0",
+		"adminEmail": "info@antech-enviro.com"
+	},
+	"production": {
+		"email":"antech.enviro@gmail.com",
+		"pass":"@ntech-envir0",
+		"adminEmail": "info@antech-enviro.com"
+	}
+}

@@ -1,0 +1,79 @@
+table.table.table-striped
+  thead
+    tr
+      td Product Name
+      td Quantity
+      td
+        label
+          i.fa.fa-trash-o
+  tbody
+    each prod in qList
+      tr(id='tr_#{prod.id}')
+        td= prod.name
+        td= prod.qty
+        td
+          button.btn.btn-default(id='btn_#{prod.id}')
+            i.fa.fa-trash
+p(class="#{qList.length==0?'':'hidden'}") No selected item
+
+p Please provide your name and email address for the price quotation.        
+        
+form.contact-form.form-inline#main-contact-form(method='get', action='/pricequotation/sendpq', role='form')
+  .row
+    .col-md-6
+      .form-group
+         label(for='rName') Name
+         input#rName.form-control(type='text', placeholder='Juan Delacruz', required='required')
+      .form-group
+         label(for='rAddress') Address
+         input#rAddress.form-control(type='text', placeholder='My Address')
+    .col-md-6
+      .form-group
+         label(for='rCompany') Company
+         input#rCompany.form-control(type='text', placeholder='My Company', required='required')
+      .form-group
+         label(for='rContact') Contact Num.
+         input#rContact.form-control(type='text', placeholder='451-00-00')
+    .col-md-12
+      .form-group
+         label(for='rEmail') Email
+         input#rEmail.form-control(type='email', placeholder='juan.delacruz@example.com', required='required')
+    .col-md-12  
+      button.btn.btn-primary(type='submit') Send Request
+  
+
+ script.
+   //Contact form
+    $( "button[id^='btn_']" ).click(function() {
+     $.post("/pricequotation/deleteitem",{
+       idx: this.id.split('_')[1]
+     },
+     function(data, status){
+       //alert("Data: " + data.status + "\nStatus: " + status);
+       if (data.status==='ok') {
+          $("#tr_"+data.idx).remove();
+       }
+       
+     });
+   });
+  
+   var form = $('#main-contact-form');
+         form.submit(function(event){
+          event.preventDefault();
+          var form_status = $('<div class="form_status"></div>');
+          $.ajax({
+           url: $(this).attr('action'),
+           data: {
+            rName: $('#rName').val(),
+            rCompany: $('#rCompany').val(),
+            rAddress: $('#rAddress').val(),
+            rContact: $('#rContact').val(),
+            rEmail: $('#rEmail').val()
+           },
+           beforeSend: function(){
+           form.prepend( form_status.html('<p><i class="fa fa-spinner fa-spin"></i> Email is sending...</p>').fadeIn() );
+          }
+          }).done(function(data){
+           form_status.html('<p class="text-success">' + data.message + '</p>').delay(3000).fadeOut();
+          });
+         });

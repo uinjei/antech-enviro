@@ -1,0 +1,61 @@
+extends layout
+
+block content
+
+  h1 Product Category
+      form(method='POST', action="/admin/product/save", enctype='multipart/form-data')
+        .form-group
+          label(for='site_title') Product Category
+          select.form-control(required='required', name='category_id')
+           each category in p_category
+             option(value='#{category.id}') #{category.name} 
+        .form-group
+          label(for='site_title') Product Name
+          input#site_title.form-control(type='text', name='name', required='required')
+        .form-group
+          label(for='site_title') Product Description
+          input#site_title.form-control(type='text', name='description', required='required')
+        .form-group
+          label(for='file') Product Image
+          input(type='file', name='userfile', size='20', style='display:inline', required='required')
+          p.help-block Select image.
+          button.btn.btn-default(type='submit') Save
+      hr
+      h3 Category Listing
+      table.table.table-striped
+        th(width='30%') Product Name
+        th(width='40%') Pro Description
+        th(width='10%') Image
+        th(width='30%', style='text-align:center') Action
+        
+        each product in products
+         tr(id='#{product.id}')
+            td= product.name
+            td= product.description
+            td(align='center')
+              img(src='/data/#{product.image}', width='30')
+            td(align='center', style='vertical-align:middle;')
+              a(href='product/edit?id=#{product.id}') EDIT
+              a(href='#',class='del',data-id='#{product.id}')   DELETE
+        
+      script.
+        $('#myStateButton').on('click', function () {
+        $(this).button('complete') // button text will be "finished!"
+        });
+
+        $('.del').click(function(){
+          if( confirm("Are you sure you want to delete this product ?") == true )
+          {
+            var row = $(this);
+            $.post('/admin/product/delete',{
+              'id'  : row.data('id')
+            }).done(function(msg){
+              row.parent().parent().fadeOut();
+            });
+          }
+          else
+          {
+           alert('Operation Aborted:');
+          }
+          return false;
+        });

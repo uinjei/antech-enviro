@@ -1,0 +1,41 @@
+body
+    table
+      
+      tr
+        td
+          table
+            tr
+              td
+                hr
+                p Good day!
+                br
+                p You have a message from antech-enviro.com
+                
+      tr
+        td
+          table
+            tr
+              td
+                b
+                  | From:
+                  | #{name}
+                b
+                  | Company:
+                  | #{company}
+              td
+                b
+                  | Email:
+                  | #{email}
+              .col-md-6
+                b
+                  | Phone:
+                  | #{phone}
+              td
+                b
+                  | Subject:
+                  | #{subject}
+                      
+      
+      tr
+        td
+          p= message

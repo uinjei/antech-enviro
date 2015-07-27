@@ -1,0 +1,28 @@
+extends layout
+
+block content
+
+    section#blog.container
+      .blog
+        .row
+           .col-md-6
+             img.img-responsive.img-blog(src='data/#{product.image}', width='100%', alt='')
+             h2= product.name
+             h3= product.Category.name
+           .col-md-6
+             p= product.description
+        .row
+           .col-md-3
+               .input-group
+                 input#prodQty.form-control(type='text', placeholder='Quantity')
+                 span.input-group-btn
+                   a.btn.btn-default(data-toggle='lightbox', href='', onclick="this.href='/pricequotation/add?prodId=#{product.id}&prodName=#{encodeURI(product.name)}&prodQty='+document.getElementById('prodQty').value") Add to quote list
+           .col-md-9
+             .pull-right
+                 a.btn.btn-primary(href='/products/update?selPrincipalId=#{selPrincipalId}&catId=#{catId}')
+                   i.fa.fa-angle-left
+                   | &nbsp;
+                   | Back to Product List
+     
+    include ./includes/bottom.jade               
+    

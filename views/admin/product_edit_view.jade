@@ -1,0 +1,24 @@
+extends layout
+
+block content
+
+  h1 Product Category
+      form(method='POST', action="/admin/product/update", enctype='multipart/form-data')
+        .form-group
+          label(for='site_title') Product Category
+          input#site_title.form-control(type='hidden', name='id', required='required' value='#{product.id}')
+          select.form-control(required='required', name='category_id')
+           each category in p_category
+             option(value='#{category.id}') #{category.name} 
+        .form-group
+          label(for='site_title') Product Name
+          input#site_title.form-control(type='text', name='name', required='required' value='#{product.name}')
+        .form-group
+          label(for='site_title') Product Description
+          input#site_title.form-control(type='text', name='description', required='required' value='#{product.description}')
+        .form-group
+          label(for='file') Product Image
+          input(type='file', name='userfile', size='20', style='display:inline')
+          img(src='/data/#{product.image}', width='100')
+          p.help-block Select image.
+          button.btn.btn-default(type='submit') Save
