@@ -3,33 +3,21 @@ extends layout
 block content
 
     // /header
-    section#main-slider.no-margin
-      .carousel.slide
-        ol.carousel-indicators
-          each slider in sliders
-            - var x = sliders.indexOf(slider)
-            li(class="#{x==0?'active':''}", data-target='#main-slider', data-slide-to='#{x}')
-        .carousel-inner
-          each slider in sliders
-            .item(class="#{sliders.indexOf(slider)==0?'active':''}")
-              .container
-                .row.slide-margin
-                  .col-sm-6
-                    .carousel-content
-                      h1.animation.animated-item-1= slider.title
-                      h2.animation.animated-item-2= slider.description
-                      a.btn-slide.animation.animated-item-3(href='#{slider.link}') Read More
-                  .col-sm-6.hidden-xs.animation.animated-item-4
-                    .slider-img
-                      img.img-responsive(src='/data/#{slider.image}')
-            // /.item
-        // /.carousel-inner
-      // /.carousel
-      a.prev.hidden-xs(href='#main-slider', data-slide='prev')
-        i.fa.fa-chevron-left
-      a.next.hidden-xs(href='#main-slider', data-slide='next')
-        i.fa.fa-chevron-right
-    // /#main-slider
+    section#contact-info
+     .flipster
+          ul
+            each slider in sliders
+              li
+                .item(class="#{sliders.indexOf(slider)==0?'active':''}")
+                  .container
+                    .row
+                      .col-sm-6
+                          h1= slider.title
+                          h2= slider.description
+                          a(href='#{slider.link}') Read More
+                      .col-sm-6.hidden-xs.animation.animated-item-4
+                        .slider-img
+                          img.img-responsive(src='/data/#{slider.image}')
     section#services.service-item
       .container
         .center.wow.fadeInDown
@@ -48,7 +36,7 @@ block content
         // /.row
       // /.container
     // /#services
-    section#conatcat-info
+    section#contact-info
       .container
         .row
           .col-sm-8
@@ -62,5 +50,5 @@ block content
                   a(href='/contact') &nbsp; contacts
                   | &nbsp; page.
       // /.container
-    // /#conatcat-info
+    // /#conatact-info
     include ./includes/bottom.jade
